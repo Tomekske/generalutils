@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Top-level package for generalutils."""
+"""Top-level package for GeneralUtils."""
 
 __author__ = """Tomek Joostens"""
 __email__ = 'joostenstomek@gmail.com'

@@ -1,32 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-===============================
-HtmlTestRunner
-===============================
-
-
-.. image:: https://img.shields.io/pypi/v/generalutils.svg
-        :target: https://pypi.python.org/pypi/generalutils
-.. image:: https://img.shields.io/travis/Tomekske/generalutils.svg
-        :target: https://travis-ci.org/Tomekske/generalutils
-
-This package contains some common general utilisations modules
-
-
-Links:
----------
-* `Github <https://github.com/Tomekske/generalutils>`_
-"""
+"""The setup script."""
 
 from setuptools import setup, find_packages
 
-requirements = [ ]
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
 
-setup_requirements = [ ]
+with open('HISTORY.rst') as history_file:
+    history = history_file.read()
 
-test_requirements = [ ]
+
+setup_requirements = ['pytest-runner', ]
+
+test_requirements = ['pytest', ]
 
 setup(
     author="Tomek Joostens",
@@ -36,17 +24,12 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
     description="This package contains some common general utilisations modules",
-    install_requires=requirements,
     license="MIT license",
-    long_description=__doc__,
+    long_description=readme + '\n\n' + history,
     include_package_data=True,
     keywords='generalutils',
     name='generalutils',
