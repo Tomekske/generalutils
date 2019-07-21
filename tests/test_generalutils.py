@@ -7,6 +7,7 @@ import os
 import random
 import unittest
 import generalutils.guard as guard
+from generalutils.constants import HttpStatusCode
 
 class TestGeneralUtils(unittest.TestCase):
     
@@ -43,7 +44,7 @@ class TestGeneralUtils(unittest.TestCase):
         # Empty string
         word = ''
 
-        exception = f"object - '{word}' is none or empty"
+        exception = f"Object - '{word}' is none or empty"
 
         with self.assertRaises(Exception) as context:
             guard.Collections.IsNotNoneOrEmpty(word)
@@ -56,12 +57,48 @@ class TestGeneralUtils(unittest.TestCase):
         # None assigned object
         word = None
 
-        exception = f"object - '{word}' is none or empty"
+        exception = f"Object - '{word}' is none or empty"
 
         with self.assertRaises(Exception) as context:
             guard.Collections.IsNotNoneOrEmpty(word)
 
         self.assertTrue(exception in str(context.exception))
     
+    def test_StatusCodesEqual(self):
+        '''Test whether the status codes are returning correctly'''
+        
+        self.assertEqual(HttpStatusCode.Ok, 200)
+        self.assertEqual(HttpStatusCode.Created, 201)
+        self.assertEqual(HttpStatusCode.NoContent, 204)
+        self.assertEqual(HttpStatusCode.BadRequest, 400)
+        self.assertEqual(HttpStatusCode.Unauthorized, 401)
+        self.assertEqual(HttpStatusCode.Forbidden, 403)
+        self.assertEqual(HttpStatusCode.NotFound, 404)
+        self.assertEqual(HttpStatusCode.MethodNotAllowed, 405)
+        self.assertEqual(HttpStatusCode.TooManyRequests, 429)
+        self.assertEqual(HttpStatusCode.InternalServerError, 500)
+        self.assertEqual(HttpStatusCode.BadGateway, 502)
+        self.assertEqual(HttpStatusCode.ServiceUnavailable, 503)
+        self.assertEqual(HttpStatusCode.GatewayTimeout, 504)
+
+    def test_StatusCodesNotEqual(self):
+        '''Negative test to check whether status codes are not equal'''
+        
+        statusCode = 9999
+
+        self.assertNotEqual(HttpStatusCode.Ok, statusCode)
+        self.assertNotEqual(HttpStatusCode.Created, statusCode)
+        self.assertNotEqual(HttpStatusCode.NoContent, statusCode)
+        self.assertNotEqual(HttpStatusCode.BadRequest, statusCode)
+        self.assertNotEqual(HttpStatusCode.Unauthorized, statusCode)
+        self.assertNotEqual(HttpStatusCode.Forbidden, statusCode)
+        self.assertNotEqual(HttpStatusCode.NotFound, statusCode)
+        self.assertNotEqual(HttpStatusCode.MethodNotAllowed, statusCode)
+        self.assertNotEqual(HttpStatusCode.TooManyRequests, statusCode)
+        self.assertNotEqual(HttpStatusCode.InternalServerError, statusCode)
+        self.assertNotEqual(HttpStatusCode.BadGateway, statusCode)
+        self.assertNotEqual(HttpStatusCode.ServiceUnavailable, statusCode)
+        self.assertNotEqual(HttpStatusCode.GatewayTimeout, statusCode)
+
 if __name__ == '__main__':
 	unittest.main()
