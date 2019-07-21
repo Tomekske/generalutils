@@ -42,7 +42,7 @@ class Http:
     '''Guard class containing static methods to easily check basic http functions'''
 
     @staticmethod
-    def StatusCode(self, excpectedStatusCode, statusCode):
+    def StatusCode(excpectedStatusCode, statusCode):
         '''Check whether the returned status codes are correct
         
         Args:
