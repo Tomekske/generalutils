@@ -56,3 +56,22 @@ class Http:
         if not statusCode == excpectedStatusCode:
             raise Exception(f"Returned status code: {statusCode}, excepted status code: {excpectedStatusCode}")
         return True
+
+class Argument:
+    '''Guard class containing static methods to easily check basic argument functions'''
+
+    @staticmethod
+    def Valid(arg):
+        '''Check whether an argument is valid
+        
+        Args:
+            arg (obj): Object which is getting checked
+        Returns:
+            (bool) Returns true on success
+        '''
+
+        # Check whether the argument is valid
+        if not arg:
+            return False
+        return True
+
