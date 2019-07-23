@@ -100,5 +100,19 @@ class TestGeneralUtils(unittest.TestCase):
         self.assertNotEqual(HttpStatusCode.ServiceUnavailable, statusCode)
         self.assertNotEqual(HttpStatusCode.GatewayTimeout, statusCode)
 
+    def test_ValidArgument(self):
+        '''Test whether an argument is valid'''
+
+        arg = ["this", "is", "a", "test"]
+
+        self.assertTrue(guard.Argument.Valid(arg))
+    
+    def test_InvalidArgument(self):
+        '''Test whether an argument is invalid'''
+
+        arg = None
+
+        self.assertFalse(guard.Argument.Valid(arg))
+
 if __name__ == '__main__':
 	unittest.main()
