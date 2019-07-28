@@ -27,3 +27,11 @@ History
 
 * Guard method to test whether a command line argument is valid or invalid
 * Unit test to check whether guard method works
+
+0.1.4 (2019-07-28)
+------------------
+* Guard method to check whether a path exists (returns boolean)
+* Unit test to check whether guard method works
+* Changed method name: Valid -> IsValid
+* Changed method name: IsNotNoneOrEmpty -> NotNoneOrEmpty
+* Updated unit tests with the correct method name
