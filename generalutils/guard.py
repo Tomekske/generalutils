@@ -5,7 +5,7 @@ class Filesystem:
     
     @staticmethod
     def PathExist(path):
-        '''Check whether a path exists
+        '''Check whether a path exists, an exception is thrown if the path doesn't exists
         
         Args:
             path (string): Path to the item
@@ -19,12 +19,27 @@ class Filesystem:
             raise Exception(exception)
         return True
 
+    @staticmethod
+    def IsPath(path):
+        '''Check whether a path exists
+        
+        Args:
+            path (string): Path to the item
+        Returns:
+            (bool) Returns true on success or false on failure
+        '''
+
+        # Check whether the path the file or directory exists
+        if not os.path.exists(path):
+            return False
+        return True
+
 class Collections:
     '''Guard class containing static methods to easily check basic collection functions'''
     
     @staticmethod
-    def IsNotNoneOrEmpty(obj):
-        '''Check whether an object is none or empty
+    def NotNoneOrEmpty(obj):
+        '''Check whether an object is none or empty, an exception is thrown when the object is not or empty
         
         Args:
             object (obj): Object which is getting checked
@@ -61,13 +76,13 @@ class Argument:
     '''Guard class containing static methods to easily check basic argument functions'''
 
     @staticmethod
-    def Valid(arg):
+    def IsValid(arg):
         '''Check whether an argument is valid
         
         Args:
             arg (obj): Object which is getting checked
         Returns:
-            (bool) Returns true on success
+            (bool) Returns true on success or false on failure
         '''
 
         # Check whether the argument is valid
