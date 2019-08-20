@@ -121,11 +121,56 @@ class TestGeneralUtils(unittest.TestCase):
         self.assertTrue(guard.Argument.IsValid(arg))
     
     def test_InvalidArgument(self):
-        '''Test whether an argument is invalid'''
+        '''Negative test to check whether an argument is invalid'''
 
         arg = None
 
         self.assertFalse(guard.Argument.IsValid(arg))
+
+    def test_ValidCwdPath(self):
+        '''Test whether the current working directory is within the base path'''
+
+        cwd = r"Z:\\This\\Is\\1\\2"
+        cwd1 = r"Z:\\This\\Is\\1"
+        cwd2 = r"Z:\\This\\Is"
+        base = r"Z:\\This\\Is"
+
+        self.assertTrue(guard.Filesystem.PathCwdExists(base, cwd))
+        self.assertTrue(guard.Filesystem.PathCwdExists(base, cwd1))
+        self.assertTrue(guard.Filesystem.PathCwdExists(base, cwd2))
+
+    def test_InValidCwdPath(self):
+        '''Negative test to check whether the current working directory is not within the base path'''
+
+        cwd = r"Z:\\This\\Ikjs\\1\\2"
+        base = r"Z:\\This\\Is"
+
+        exception = f"Current working directory: '{cwd}' is not within in the '{base}' path"
+
+        with self.assertRaises(Exception) as context:
+            guard.Filesystem.PathCwdExists(base, cwd)
+
+        self.assertTrue(exception in str(context.exception))
+
+    def test_IsValidCwdPath(self):
+        '''Test whether the current working directory is within the base path'''
+
+        cwd = r"Z:\\This\\Is\\1\\2"
+        cwd1 = r"Z:\\This\\Is\\1"
+        cwd2 = r"Z:\\This\\Is"
+        base = r"Z:\\This\\Is"
+
+        self.assertTrue(guard.Filesystem.IsPathCwd(base, cwd))
+        self.assertTrue(guard.Filesystem.IsPathCwd(base, cwd1))
+        self.assertTrue(guard.Filesystem.IsPathCwd(base, cwd2))
+
+    def test_IsInvalidValidCwdPath(self):
+        '''Negative test to check whether the current working directory is not within the base path'''
+
+        cwd = r"Z:\\This\\IsInvalid\\1\\2"
+        base = r"Z:\\This\\Is"
+
+        self.assertFalse(guard.Filesystem.IsPathCwd(base, cwd))
 
 if __name__ == '__main__':
 	unittest.main()

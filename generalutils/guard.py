@@ -34,6 +34,43 @@ class Filesystem:
             return False
         return True
 
+    @staticmethod
+    def PathCwdExists(base, cwd):
+        '''Check whether the current working directory is not within the base path
+        
+        Args:
+            base (string): Base path
+            cwd (string): Current working directory located within the base path
+        Returns:
+            (bool) Returns true on success
+        '''
+
+        basename = os.path.basename(base)
+        tokenedCwd = cwd.split('\\')
+
+        if basename not in tokenedCwd:
+            exception = f"Current working directory: '{cwd}' is not within in the '{base}' path"
+            raise Exception(exception)
+        return True    
+
+    @staticmethod
+    def IsPathCwd(base, cwd):
+        '''Check whether the current working directory is not within the base path
+        
+        Args:
+            base (string): Base path
+            cwd (string): Current working directory located within the base path
+        Returns:
+            (bool) Returns true on success or false on failure
+        '''
+
+        base = os.path.basename(base)
+        cwd = cwd.split('\\')
+
+        if base not in cwd:
+            return False
+        return True 
+
 class Collections:
     '''Guard class containing static methods to easily check basic collection functions'''
     
@@ -89,4 +126,3 @@ class Argument:
         if not arg:
             return False
         return True
-

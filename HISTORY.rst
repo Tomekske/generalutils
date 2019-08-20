@@ -30,8 +30,15 @@ History
 
 0.1.4 (2019-07-28)
 ------------------
+
 * Guard method to check whether a path exists (returns boolean)
 * Unit test to check whether guard method works
 * Changed method name: Valid -> IsValid
 * Changed method name: IsNotNoneOrEmpty -> NotNoneOrEmpty
 * Updated unit tests with the correct method name
+
+0.1.5 (2019-08-20)
+------------------
+
+* Guard method to check whether the current working directory is within the base path
+* Unit tets to check whether guard method exists
