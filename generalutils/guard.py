@@ -1,4 +1,11 @@
 import os
+import sys
+
+def ParsePathOS(path):
+    if sys.platform == "win32":
+        return path.split('\\')
+    else:
+        return path.split('/')
 
 class Filesystem:
     '''Guard class containing static methods to easily check filesystem functions'''
@@ -46,7 +53,7 @@ class Filesystem:
         '''
 
         basename = os.path.basename(base)
-        tokenedCwd = cwd.split('\\')
+        tokenedCwd = ParsePathOS(cwd)
 
         if basename not in tokenedCwd:
             exception = f"Current working directory: '{cwd}' is not within in the '{base}' path"
@@ -64,10 +71,10 @@ class Filesystem:
             (bool) Returns true on success or false on failure
         '''
 
-        base = os.path.basename(base)
-        cwd = cwd.split('\\')
+        basename = os.path.basename(base)
+        tokenedCwd = ParsePathOS(cwd)
 
-        if base not in cwd:
+        if basename not in tokenedCwd:
             return False
         return True 
 
