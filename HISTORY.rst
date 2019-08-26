@@ -42,3 +42,8 @@ History
 
 * Guard method to check whether the current working directory is within the base path
 * Unit tets to check whether guard method exists
+
+0.1.6 (2019-08-20)
+------------------
+
+* Bug fix: Check whether cwd and base path are equal
