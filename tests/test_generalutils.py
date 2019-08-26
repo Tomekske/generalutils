@@ -128,26 +128,35 @@ class TestGeneralUtils(unittest.TestCase):
 
         self.assertFalse(guard.Argument.IsValid(arg))
 
-    def test_ValidCwdPath(self):
+    def test_ValidCwdPathCwdNotEqualBase(self):
         '''Test whether the current working directory is within the base path'''
 
         if sys.platform == "win32":
-            base = r"Z:\\This\\Is"
+            base = "Z:\\This\\Is"
             self.assertTrue(guard.Filesystem.PathCwdExists(base, "Z:\\This\\Is\\1\\2"))
             self.assertTrue(guard.Filesystem.PathCwdExists(base, "Z:\\This\\Is\\1"))
             self.assertTrue(guard.Filesystem.PathCwdExists(base, "Z:\\This\\Is"))
         else:
-            base = r"Z:/This/Is"
+            base = "Z:/This/Is"
             self.assertTrue(guard.Filesystem.PathCwdExists(base, "Z:/This/Is/1/2"))
             self.assertTrue(guard.Filesystem.PathCwdExists(base, "Z:/This/Is/1"))
             self.assertTrue(guard.Filesystem.PathCwdExists(base, "Z:/This/Is"))
 
+    def test_ValidCwdPathCwdEqualBase(self):
+        '''Test whether the current working directory is equal to the base path'''
 
-    def test_InValidCwdPath(self):
+        if sys.platform == "win32":
+            base = "Z:\\This\\Is"
+            self.assertTrue(guard.Filesystem.PathCwdExists(base, "Z:\\This\\Is", True))
+        else:
+            base = "Z:/This/Is"
+            self.assertTrue(guard.Filesystem.PathCwdExists(base, "Z:/This/Is", True))
+
+    def test_InValidCwdPathCwdNotEqual(self):
         '''Negative test to check whether the current working directory is not within the base path'''
 
         if sys.platform == "win32":
-            base = r"Z:\\This\\Is"
+            base = "Z:\\This\\Is"
             cwd = "Z:\\This\\IsInvalid\\1\\2"
             exception = f"Current working directory: '{cwd}' is not within in the '{base}' path"
             
@@ -157,7 +166,7 @@ class TestGeneralUtils(unittest.TestCase):
             self.assertTrue(exception in str(context.exception))
             
         else:
-            base = r"Z:/This/Is"
+            base = "Z:/This/Is"
             cwd = "Z:/This/IsInvalid/1/2"
             exception = f"Current working directory: '{cwd}' is not within in the '{base}' path"
 
@@ -166,29 +175,39 @@ class TestGeneralUtils(unittest.TestCase):
 
             self.assertTrue(exception in str(context.exception))
 
-
-    def test_IsValidCwdPath(self):
+    def test_IsValidCwdPathCwdNotEqualBase(self):
         '''Test whether the current working directory is within the base path'''
 
         if sys.platform == "win32":
-            base = r"Z:\\This\\Is"
+            base = "Z:\\This\\Is"
             self.assertTrue(guard.Filesystem.IsPathCwd(base, "Z:\\This\\Is\\1\\2"))
             self.assertTrue(guard.Filesystem.IsPathCwd(base, "Z:\\This\\Is\\1"))
             self.assertTrue(guard.Filesystem.IsPathCwd(base, "Z:\\This\\Is"))
         else:
-            base = r"Z:/This/Is"
+            base = "Z:/This/Is"
             self.assertTrue(guard.Filesystem.IsPathCwd(base, "Z:/This/Is/1/2"))
             self.assertTrue(guard.Filesystem.IsPathCwd(base, "Z:/This/Is/1"))
             self.assertTrue(guard.Filesystem.IsPathCwd(base, "Z:/This/Is"))
 
-    def test_IsInvalidValidCwdPath(self):
+    def test_IsValidCwdPathCwdEqualBase(self):
+        '''Test whether the current working directory is equal to the base path'''
+
+        if sys.platform == "win32":
+            base = "Z:\\This\\Is"
+            self.assertTrue(guard.Filesystem.IsPathCwd(base, "Z:\\This\\Is", True))
+        else:
+            base = "Z:/This/Is"
+
+            self.assertTrue(guard.Filesystem.IsPathCwd(base, "Z:/This/Is", True))
+
+    def test_IsInvalidValidCwdPathNotEqual(self):
         '''Negative test to check whether the current working directory is not within the base path'''
 
         if sys.platform == "win32":
-            base = r"Z:\\This\\Is"
+            base = "Z:\\This\\Is"
             self.assertFalse(guard.Filesystem.IsPathCwd(base, "Z:\\This\\IsInvalid\\1\\2"))
         else:
-            base = r"Z:/This/Is"
+            base = "Z:/This/Is"
             self.assertFalse(guard.Filesystem.IsPathCwd(base, "Z:/This/IsInvalid/1/2"))
 
 if __name__ == '__main__':

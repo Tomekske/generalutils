@@ -42,12 +42,13 @@ class Filesystem:
         return True
 
     @staticmethod
-    def PathCwdExists(base, cwd):
+    def PathCwdExists(base, cwd,  equals = False):
         '''Check whether the current working directory is not within the base path
         
         Args:
             base (string): Base path
             cwd (string): Current working directory located within the base path
+            equals (bool): Check whether cwd and base path are identical
         Returns:
             (bool) Returns true on success
         '''
@@ -55,28 +56,42 @@ class Filesystem:
         basename = os.path.basename(base)
         tokenedCwd = ParsePathOS(cwd)
 
-        if basename not in tokenedCwd:
-            exception = f"Current working directory: '{cwd}' is not within in the '{base}' path"
-            raise Exception(exception)
-        return True    
+        # Check whether cwd and base path are equal
+        if equals:
+            if cwd != base:
+                exception = f"Current working directory: '{cwd}' is not equal to the '{base}' path"
+                raise Exception(exception)
+            return True
+        else:
+            if basename not in tokenedCwd:
+                exception = f"Current working directory: '{cwd}' is not within in the '{base}' path"
+                raise Exception(exception)
+            return True  
 
     @staticmethod
-    def IsPathCwd(base, cwd):
+    def IsPathCwd(base, cwd, equals = False):
         '''Check whether the current working directory is not within the base path
         
         Args:
             base (string): Base path
             cwd (string): Current working directory located within the base path
+            equals (bool): Check whether cwd and base path are identical
         Returns:
             (bool) Returns true on success or false on failure
         '''
 
         basename = os.path.basename(base)
         tokenedCwd = ParsePathOS(cwd)
-
-        if basename not in tokenedCwd:
-            return False
-        return True 
+        
+        # Check whether cwd and base path are equal
+        if equals:
+            if cwd != base:
+                return False
+            return True
+        else:
+            if basename not in tokenedCwd:
+                return False
+            return True  
 
 class Collections:
     '''Guard class containing static methods to easily check basic collection functions'''
